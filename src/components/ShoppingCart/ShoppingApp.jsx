@@ -2,6 +2,7 @@ import React from "react";
 import Counters from "./Counters.jsx";
 import NavBar from "./NavBar.jsx";
 
+// Component hierarchy(ShoppingApp->NavBar And Counters->Counter)
 class ShoppingApp extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ class ShoppingApp extends React.Component {
       ],
     };
   }
+  // Reset all counter to 0
   handleRest = () => {
     const counters = this.state.counters.map((c) => {
       c.value = 0;
@@ -23,16 +25,21 @@ class ShoppingApp extends React.Component {
       counters,
     });
   };
+  // Filter and delete counter
   handleDelete = (id) => {
     this.setState({
       counters: this.state.counters.filter((c) => c.id !== id),
     });
   };
+
   handleIncrement = (counter) => {
+    // All counter
     const counters = [...this.state.counters];
+    // Find index of current counter
     const index = counters.indexOf(counter);
-    counters[index] = { ...counter };
+    // Increase current counter's value by 1
     counters[index].value++;
+    // setState counters
     this.setState({
       counters,
     });

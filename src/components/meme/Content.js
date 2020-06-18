@@ -1,10 +1,11 @@
 import React from "react"
 import styles from "../../Styling/Meme.module.css"
 
+// Styling will change according user event
 const topTextStyle = {
     fontSize: "30",
     position: "absolute",
-    top: "47%",
+    top: "37%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     color: "white",
@@ -14,17 +15,19 @@ const topTextStyle = {
 const bottomTextStyle = {
     fontSize: "30",
     position: "absolute",
-    top: "83%",
+    top: "75%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     color: "white",
     textShadow: "1px 1px black",
     fontFamily: "Algerian",
 }
+// Random colors
 const colors = [
     "black", "blueviolet", "brown", "chartreuse", "darkblue", "darkgrey", "darkorang",
     "aqua", "blue", "crimson", "darkkhaki", "darkturquoise", "deeppink", "gold", "green"]
 
+// Random font-family
 const fontFamily = [
     "Brush Script MT",
     "Rockwell",
@@ -47,13 +50,13 @@ class Content extends React.Component {
             bottomTextStyle: bottomTextStyle
         }
     }
+    // Fetching image from online API
     componentDidMount() {
         fetch("https://api.imgflip.com/get_memes")
             .then(response => response.json())
             .then(data => {
                 const { memes } = data.data
                 this.setState({ allMemeImgs: memes }
-                    //, () => console.log(this.state.allMemeImgs)
                 )
             })
     }
@@ -63,6 +66,7 @@ class Content extends React.Component {
             [name]: value
         })
     }
+    // Random image for meme.
     changeImage = (e) => {
         e.preventDefault()
         const randomNumber = Math.floor(Math.random() * this.state.allMemeImgs.length)
@@ -71,6 +75,7 @@ class Content extends React.Component {
             randomImg: randomMeme
         })
     }
+    // Random color for font.
     handleColorChange = () => {
         const color = colors[Math.floor(Math.random() * colors.length)]
         this.setState(prevState => {
@@ -80,6 +85,7 @@ class Content extends React.Component {
             }
         })
     }
+    // Random font-family.
     handleFontFamily = () => {
         const font = fontFamily[Math.floor(Math.random() * fontFamily.length)]
         this.setState(prevState => {

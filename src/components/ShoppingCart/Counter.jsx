@@ -1,10 +1,13 @@
 import React from "react";
 
+// Component hierarchy(ShoppingApp->Counters->Counter)
 class Counter extends React.Component {
   onIncrement = () => {
+    // onIncrement send to parent class(Counters->ShoppingApp)
     this.props.onIncrement(this.props.counter);
   };
   onDelete = () => {
+    // onDelete send to parent class(Counters-<ShoppingApp)
     this.props.onDelete(this.props.counter.id);
   };
   render() {
@@ -12,6 +15,7 @@ class Counter extends React.Component {
     return (
       <>
         <h3>
+          {/* decide badgeclass and format of count based on number of items */}
           <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
           <button
             onClick={this.onIncrement}
